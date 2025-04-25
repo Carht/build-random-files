@@ -39,7 +39,6 @@ Using the `filename' and the `size'."
     (format t "Informar de errores:~%")
     (format t "https://github.com/Carht/build-random-files/issues~%~%")))
     
-
 (defun main ()
   (let ((args (si:command-args)))
     (cond
@@ -47,8 +46,6 @@ Using the `filename' and the `size'."
 	   (string= (second args) "-h")
 	   (string= (second args) "--help")
 	   (string= (second args) "--ayuda"))
-       (uso args))
-      ((= (length args) 1)
        (uso args))
       (t
        (cond 
