@@ -31,9 +31,16 @@ Using the `filename' and the `size'."
   (let ((args (si:command-args)))
     (cond
       ((= (length args) 1)
-       (create-random-file
-	(concatenate 'string (random-string 25) ".bin")
-	(* 10 1024 1024)))))
+       (progn
+	 (format t "Nombre:~%")
+	 (format t "random-file - Genera un archivo con data aleatoria del tamaño que el usuario determine.~%")
+	 (format t "~%Uso: ~a archivo-a-generar tamaño~%~%" (car args))
+	 (format t "Autor:~%")
+	 (format t "     Escrito por Charte Erbeth.~%~%")
+	 (format t "Informar de errores:~%")
+	 (format t "Repositorio: https://github.com/Carht/build-random-files/issues~%")))
+      ((= (length args) 3)
+       (create-random-file (second args) (parse-integer (third args))))))
   (ext:quit 0))
 
 (main)
