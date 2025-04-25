@@ -27,20 +27,33 @@ Using the `filename' and the `size'."
 			 (random-str (1- len-chars))))))
       (concatenate 'string (random-str len-chars)))))
 
+(defun uso (args)
+  (progn
+    (format t "~%Nombre:~%")
+    (format t "        random-file - Genera un archivo con data aleatoria, del tamaño especificado por el usuario.~%")
+    (format t "~%Uso: ~a nombre-archivo-a-generar tamaño~%~%" (car args))
+    (format t "Autor:~%")
+    (format t "     Escrito por Charte Erbeth.~%~%")
+    (format t "Repositorio:~%")
+    (format t "https://github.com/Carht/build-random-files~%~%")
+    (format t "Informar de errores:~%")
+    (format t "https://github.com/Carht/build-random-files/issues~%~%")))
+    
+
 (defun main ()
   (let ((args (si:command-args)))
     (cond
+      ((or (= (length args) 1)
+	   (string= (second args) "-h")
+	   (string= (second args) "--help")
+	   (string= (second args) "--ayuda"))
+       (uso args))
       ((= (length args) 1)
-       (progn
-	 (format t "Nombre:~%")
-	 (format t "random-file - Genera un archivo con data aleatoria del tamaño que el usuario determine.~%")
-	 (format t "~%Uso: ~a archivo-a-generar tamaño~%~%" (car args))
-	 (format t "Autor:~%")
-	 (format t "     Escrito por Charte Erbeth.~%~%")
-	 (format t "Informar de errores:~%")
-	 (format t "Repositorio: https://github.com/Carht/build-random-files/issues~%")))
-      ((= (length args) 3)
-       (create-random-file (second args) (parse-integer (third args))))))
+       (uso args))
+      (t
+       (cond 
+	 ((= (length args) 3)
+	  (create-random-file (second args) (parse-integer (third args))))))))
   (ext:quit 0))
 
 (main)
