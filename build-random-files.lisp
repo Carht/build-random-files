@@ -50,7 +50,9 @@ Using the `filename' and the `size'."
       (t
        (cond 
 	 ((= (length args) 3)
-	  (create-random-file (second args) (parse-integer (third args))))))))
+	  (if (equal nil (parse-integer (third args) :junk-allowed t))
+	      (uso args)
+	      (create-random-file (second args) (parse-integer (third args)))))))))
   (ext:quit 0))
 
 (main)
